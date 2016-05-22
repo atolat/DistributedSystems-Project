@@ -1,10 +1,14 @@
 var express = require('express');
     var bodyParser= require('body-parser');
     var _=require('underscore');
+    var gcm=require('node-gcm');
 
     var app = express();
     var PORT = process.env.PORT || 3000;
-    var testdata=[{
+    
+
+//Added Test data
+var testdata=[{
         id: 1,
         description: 'Task 1',
         completed: true
@@ -108,6 +112,31 @@ app.put('/data/:id',function(req,res){
     
      _.extend(matchdata, validAttribute);
     res.json(matchdata);
+});
+
+
+//GCM integration
+
+
+var message = new gcm.Message();
+
+message.addData('key1', 'msg1');
+
+var regTokens = ['YOUR_REG_TOKEN_HERE'];
+
+// Set up the sender with you API key
+var sender = new gcm.Sender('AIzaSyDdMT2Y1-0ZFLOTLIhaEPoudYSuz38KRM');
+
+// Now the sender can be used to send messages
+sender.send(message, { registrationTokens: regTokens }, function (err, response) {
+	if(err) console.error(err);
+	else 	console.log(response);
+});
+
+// Send to a topic, with no retry this time
+sender.sendNoRetry(message, { topic: '/topics/global' }, function (err, response) {
+	if(err) console.error(err);
+	else 	console.log(response);
 });
 
 
