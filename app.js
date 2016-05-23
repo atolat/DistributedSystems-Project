@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 
-var routes = require('./routes/scratchpad-server')(app);
+var routes = require('./routes/routes')(app);
 var PORT = process.env.PORT || 3000;
 
 //Establish DB connection
