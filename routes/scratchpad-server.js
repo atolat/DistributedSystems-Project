@@ -5,10 +5,10 @@
         var gcm=require('node-gcm');
 var message = new gcm.Message();
 message.addData('key1', 'msg1');
-var regTokens = ['YOUR_REG_TOKEN_HERE'];
+//var regTokens = ['YOUR_REG_TOKEN_HERE'];
     //GCM integration
     //Set up the sender with you API key
-    var sender = new gcm.Sender('AIzaSyDdMT2Y1-0ZFLOTLIhaEPoudYSuz38KRM');
+    var sender = new gcm.Sender('AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM');
 
 
     //GET request to fetch all data
