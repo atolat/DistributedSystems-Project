@@ -3,20 +3,17 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var gcm=require('node-gcm');
-var routes = require('./routes/routes')(app);
+
+var routes = require('./routes/scratchpad-server')(app);
 var PORT = process.env.PORT || 3000;
 
 //Establish DB connection
-mongoose.connect('mongodb://localhost/node-gcm');
+//mongoose.connect('mongodb://localhost/node-gcm');
 
-//GCM integration
-var message = new gcm.Message();
-message.addData('key1', 'msg1');
-var regTokens = ['YOUR_REG_TOKEN_HERE'];
+
 
 // Set up the sender with you API key
-var sender = new gcm.Sender('AIzaSyDdMT2Y1-0ZFLOTLIhaEPoudYSuz38KRM');
+//var sender = new gcm.Sender('AIzaSyDdMT2Y1-0ZFLOTLIhaEPoudYSuz38KRM');
 
 app.use(bodyParser.json());
 
@@ -26,42 +23,26 @@ app.use(bodyParser.json());
 
 
 
-//Mongo Scratchpad
-var User = require('./models/user');
-
-var arpan=new User({
-    username: 'Arpan',
-    password: 'letmein'
-});
-
-arpan.save(function(err){
-    if(err) throw err;
-    
-    console.log('User saved!');
-});
-
-
-User.find({}, function(err, users){
-    if(err) throw err;
-    
-    console.log(users);
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+////Mongo Scratchpad
+//var User = require('./models/user');
+//
+//var arpan=new User({
+//    username: 'Arpan',
+//    password: 'letmein'
+//});
+//
+//arpan.save(function(err){
+//    if(err) throw err;
+//    
+//    console.log('User saved!');
+//});
+//
+//
+//User.find({}, function(err, users){
+//    if(err) throw err;
+//    
+//    console.log(users);
+//});
 
 
 
