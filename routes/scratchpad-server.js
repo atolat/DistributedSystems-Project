@@ -74,7 +74,7 @@ var message = {
         //Twilio message
         client.sendMessage({
 
-    to:'+19493000798', // Any number Twilio can deliver to
+    to:'+19492937594', // Any number Twilio can deliver to
     from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
     body: 'Hello from node!' // body of the SMS message
 
