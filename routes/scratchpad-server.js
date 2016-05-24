@@ -45,20 +45,20 @@ var message = {
     //POST request to pass user data to app in JSON
     // POST /todos
     app.post('/alldata',function(req,res){
-        var body = _.pick(req.body,'description','completed'); 
-       
-        //Validation
-        if(!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length===0){
-            return res.status(400).send();
-        }
-
-
-
-        //console.log(body.description);
-         body.description=body.description.trim();
-         body.id=Id;
-            testdata.push(body);
-            Id++;
+//        var body = _.pick(req.body,'description','completed'); 
+//       
+//        //Validation
+//        if(!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length===0){
+//            return res.status(400).send();
+//        }
+//
+//
+//
+//        //console.log(body.description);
+//         body.description=body.description.trim();
+//         body.id=Id;
+//            testdata.push(body);
+//            Id++;
         gcm.send(message, function(err, messageId){
     if (err) {
         console.log("Something has gone wrong!");
