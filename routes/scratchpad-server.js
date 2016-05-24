@@ -56,9 +56,9 @@ var message = {
 
         //console.log(body.description);
          body.description=body.description.trim();
-         body.id=todoId;
+         body.id=Id;
             testdata.push(body);
-            todoId++;
+            Id++;
         gcm.send(message, function(err, messageId){
     if (err) {
         console.log("Something has gone wrong!");
