@@ -2,13 +2,17 @@
     var _=require('underscore');
     var testdata=[];
         //GCM integration
-        var gcm=require('node-gcm');
-var message = new gcm.Message();
-message.addData('key1', 'msg1');
-//var regTokens = ['YOUR_REG_TOKEN_HERE'];
-    //GCM integration
-    //Set up the sender with you API key
-    var sender = new gcm.Sender('AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM');
+        var GCM = require('gcm').GCM;
+
+var apiKey = 'AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM';
+
+  var gcm = new GCM(apiKey);
+var message = {
+    registration_id: 'fKp3WaVSsNI:APA91bFnAHkydqqbLdytF2RGdsNpjSFA7TcIvnZIx5fwfvAXfNkPrW_jEOVPBvxnXZeFLReOVE9eTUY8pvafxikFNUjveWUOPF4y2OLBlLvOOB1Hl8vKzVWgxMJ5AS0FR-ybW4zkYVe8', // required
+    collapse_key: 'Collapse key', 
+    'data.key1': 'value1',
+    'data.key2': 'value2'
+};
 
 
     //GET request to fetch all data
@@ -32,24 +36,32 @@ message.addData('key1', 'msg1');
     });
 
     //POST request to pass user data to app in JSON
-    // POST /data
-    //Data Schema ({username: String, reqToken: String, message: String})
-    app.post('/data',function(req,res){
-    var body = _.pick(req.body,'reqToken','message'); 
-    res.json(body);
+    // POST /todos
+    app.post('/todos',function(req,res){
+        var body = _.pick(req.body,'description','completed'); 
+       
+        //Validation
+        if(!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length===0){
+            return res.status(400).send();
+        }
 
 
-    //Send GCM message for post requests
-    var message = new gcm.Message();
 
-    message.addData('key1', body.message);
-    var regTokens = body.reqToken;
+        //console.log(body.description);
+         body.description=body.description.trim();
+         body.id=todoId;
+            todos.push(body);
+            todoId++;
+        gcm.send(message, function(err, messageId){
+    if (err) {
+        console.log("Something has gone wrong!");
+    } else {
+        console.log("Sent with message ID: ", messageId);
+    }
+});
+        
 
-
-    sender.send(message, regTokens, function (err, response) {
-    if(err) console.error(err);
-    else 	console.log(response);
-    });
+        res.json(body);
 
     });
 
