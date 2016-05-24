@@ -131,10 +131,30 @@
             //                }
             //            });
             //Send Twilio message on POST
-            if (body.wifi == true) {
+            if (body.wifi == false) {
                 client.sendMessage({
 
                     to: '+19493000798', // Any number Twilio can deliver to
+                    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+                    body: 'Hello from node!' // body of the SMS message
+
+                }, function (err, responseData) { //this function is executed when a response is received from Twilio
+
+                    if (!err) { // "err" is an error received during the request, if any
+
+                        // "responseData" is a JavaScript object containing data received from Twilio.
+                        // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
+                        // http://www.twilio.com/docs/api/rest/sending-sms#example-1
+
+                        console.log(responseData.from);
+                        console.log(responseData.body);
+
+                    }
+                });
+                
+                client.sendMessage({
+
+                    to: '+19492937594', // Any number Twilio can deliver to
                     from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
                     body: 'Hello from node!' // body of the SMS message
 
