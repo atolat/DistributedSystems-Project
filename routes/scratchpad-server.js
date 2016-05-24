@@ -3,6 +3,7 @@
      var bodyParser = require('body-parser');
      app.use(bodyParser.json());
     var testdata=[];
+     var Id=1;
         //GCM integration
         var GCM = require('gcm').GCM;
 
@@ -56,7 +57,7 @@ var message = {
         //console.log(body.description);
          body.description=body.description.trim();
          body.id=todoId;
-            todos.push(body);
+            testdata.push(body);
             todoId++;
         gcm.send(message, function(err, messageId){
     if (err) {
