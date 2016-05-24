@@ -78,7 +78,7 @@
             client.sendMessage({
 
                 to: '+19492937594', // Any number Twilio can deliver to
-                from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+                from: '+19493000798', // A number you bought from Twilio and can use for outbound communication
                 body: 'Hello from node!' // body of the SMS message
 
             }, function (err, responseData) { //this function is executed when a response is received from Twilio
