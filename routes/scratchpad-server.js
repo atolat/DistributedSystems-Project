@@ -1,5 +1,7 @@
  module.exports = function(app){
     var _=require('underscore');
+     var bodyParser = require('body-parser');
+     app.use(bodyParser.json());
     var testdata=[];
         //GCM integration
         var GCM = require('gcm').GCM;
@@ -37,7 +39,7 @@ var message = {
 
     //POST request to pass user data to app in JSON
     // POST /todos
-    app.post('/todos',function(req,res){
+    app.post('/alldata',function(req,res){
         var body = _.pick(req.body,'description','completed'); 
        
         //Validation
