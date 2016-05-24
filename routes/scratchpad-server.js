@@ -17,6 +17,9 @@ var message = {
 };
 
     
+ app.get('/',function(req, res){
+        res.send('Todo API Root');
+    });
 
     //GET request to fetch all data
     //GET /alldata

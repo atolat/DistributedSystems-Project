@@ -1,11 +1,9 @@
 var express = require('express');
 var app = express();
-var PORT = process.env.PORT || 3000;
 var routes = require('./routes/scratchpad-server')(app);
+var PORT = process.env.PORT || 3000;
 
- app.get('/',function(req, res){
-        res.send('Todo API Root');
-    });
+
 
 
 app.listen(PORT,function(){
