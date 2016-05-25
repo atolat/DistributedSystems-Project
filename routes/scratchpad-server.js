@@ -12,7 +12,7 @@
 
         var gcm = new GCM(apiKey);
         var message = {
-            registration_id: 'fKp3WaVSsNI:APA91bFnAHkydqqbLdytF2RGdsNpjSFA7TcIvnZIx5fwfvAXfNkPrW_jEOVPBvxnXZeFLReOVE9eTUY8pvafxikFNUjveWUOPF4y2OLBlLvOOB1Hl8vKzVWgxMJ5AS0FR-ybW4zkYVe8', // required
+            registration_id: 'c2SFnrpacZg:APA91bEc3lODfr7EoxmLqU16KZsWiosBWhhig4f1pIGSvwIBf2eQgNyxRnNZw_iCksup1IYL_rHQTW6YYyNLGeiuTSbPOENuMSfJFjxGF6cimm4J97EZOd9y__n9klwEtvX9dBUkcaH1', // required
             collapse_key: 'Collapse key'
             , 'data.key1': 'value1'
             , 'data.key2': 'value2'
@@ -109,27 +109,14 @@
         app.post('/sms', function (req, res) {
             var body = _.pick(req.body, 'wifi');
 
-            //            //Validation
-            //            if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
-            //                return res.status(400).send();
-            //            }
-
-
-
-            //            //console.log(body.description);
-            //            body.description = body.description.trim();
-            //            body.id = Id;
-            //            testdata.push(body);
-            //            Id++;
-            //            
-            //            //Send GCM alert on POST
-            //            gcm.send(message, function (err, messageId) {
-            //                if (err) {
-            //                    console.log("Something has gone wrong!");
-            //                } else {
-            //                    console.log("Sent with message ID: ", messageId);
-            //                }
-            //            });
+            //Send GCM alert on POST
+            gcm.send(message, function (err, messageId) {
+                if (err) {
+                    console.log("Something has gone wrong!");
+                } else {
+                    console.log("Sent with message ID: ", messageId);
+                }
+            });
             //Send Twilio message on POST
             console.log(req.body);
             console.log(body);
