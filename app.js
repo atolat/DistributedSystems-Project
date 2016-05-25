@@ -25,6 +25,7 @@ app.use(allowCrossDomain);
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
     if (err) {
         console.log(err);
+        console.log('Something went wrong');
         process.exit(1);
     }
 
