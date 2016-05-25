@@ -29,7 +29,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
     }
 
     db = database;
-    console.log("Database connection ready");
+    console.log('Database connection ready');
 
     app.listen(PORT, function () {
         console.log('Express listening on port:: ' + PORT);
