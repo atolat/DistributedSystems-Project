@@ -118,6 +118,7 @@
                 }
             });
             //Send Twilio message on POST
+            console.log(req);
             console.log(req.body);
             console.log(body);
             if (body.wifi == false) {
