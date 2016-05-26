@@ -10,13 +10,13 @@
         var GCM = require('gcm').GCM;
         var apiKey = 'AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM';
 
-        var gcm = new GCM(apiKey);
-        var message = {
-            registration_id: 'c2SFnrpacZg:APA91bEc3lODfr7EoxmLqU16KZsWiosBWhhig4f1pIGSvwIBf2eQgNyxRnNZw_iCksup1IYL_rHQTW6YYyNLGeiuTSbPOENuMSfJFjxGF6cimm4J97EZOd9y__n9klwEtvX9dBUkcaH1', // required
-            collapse_key: 'Collapse key'
-            , 'data.key1': 'value1'
-            , 'data.key2': 'value2'
-        };
+//        var gcm = new GCM(apiKey);
+//        var message = {
+//            registration_id: 'c2SFnrpacZg:APA91bEc3lODfr7EoxmLqU16KZsWiosBWhhig4f1pIGSvwIBf2eQgNyxRnNZw_iCksup1IYL_rHQTW6YYyNLGeiuTSbPOENuMSfJFjxGF6cimm4J97EZOd9y__n9klwEtvX9dBUkcaH1', // required
+//            collapse_key: 'Collapse key'
+//            , 'data.key1': 'value1'
+//            , 'data.key2': 'value2'
+//        };
 
         //Twilio Integration
         var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
