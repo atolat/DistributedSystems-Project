@@ -50,23 +50,32 @@
 
         //POST request to pass user data to app in JSON
         // POST /todos
-        app.post('/alldata', function (req, res) {
-            var body = _.pick(req.body, 'description', 'completed');
+        app.post('/user', function (req, res) {
+            var body = _.pick(req.body, 'user', 'token', 'num');
+            console.log(body.user);
+            console.log(body.token);
+            console.log(body.num);
 
-            //Validation
-            if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
-                return res.status(400).send();
-            }
-
-
-
-            //console.log(body.description);
-            body.description = body.description.trim();
-            body.id = Id;
-            testdata.push(body);
-            Id++;
+                       //console.log(body.description);
+//            body.description = body.description.trim();
+//            body.id = Id;
+//            testdata.push(body);
+//            Id++;
 
             //Send GCM alert on POST
+            //GCM CONFIG
+            
+        
+
+        var gcm = new GCM(apiKey);
+        var regid = body.token;    
+        var message = {
+            registration_id: regid, // required
+            collapse_key: 'Collapse key'
+            , 'data.key1': 'value1'
+            , 'data.key2': 'value2'
+        };
+            
             gcm.send(message, function (err, messageId) {
                 if (err) {
                     console.log("Something has gone wrong!");
@@ -77,9 +86,9 @@
             //Send Twilio message on POST
             client.sendMessage({
 
-                to: '+19493000798', // Any number Twilio can deliver to
+                to: body.num, // Any number Twilio can deliver to
                 from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-                body: 'Hello from node!' // body of the SMS message
+                body: 'You have been connected to our service!!' // body of the SMS message
 
             }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
@@ -104,6 +113,23 @@
 
 
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 
         app.post('/sms', function (req, res) {
