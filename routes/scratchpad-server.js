@@ -70,7 +70,7 @@
 
                 to: body.num, // Any number Twilio can deliver to
                 from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-                body:  'Hi, '+body.name+' you have been connected to our service!!' // body of the SMS message
+                body:  'Hi, '+body.user+' you have been connected to our service!!' // body of the SMS message
 
             }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
