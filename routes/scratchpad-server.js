@@ -10,14 +10,6 @@
         var GCM = require('gcm').GCM;
         var apiKey = 'AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM';
 
-//        var gcm = new GCM(apiKey);
-//        var message = {
-//            registration_id: 'c2SFnrpacZg:APA91bEc3lODfr7EoxmLqU16KZsWiosBWhhig4f1pIGSvwIBf2eQgNyxRnNZw_iCksup1IYL_rHQTW6YYyNLGeiuTSbPOENuMSfJFjxGF6cimm4J97EZOd9y__n9klwEtvX9dBUkcaH1', // required
-//            collapse_key: 'Collapse key'
-//            , 'data.key1': 'value1'
-//            , 'data.key2': 'value2'
-//        };
-
         //Twilio Integration
         var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
 
@@ -49,33 +41,23 @@
         });
 
         //POST request to pass user data to app in JSON
-        // POST /todos
+        // POST /user
+        //{'user': String, 'token': String, 'num': String}
         app.post('/user', function (req, res) {
             var body = _.pick(req.body, 'user', 'token', 'num');
             console.log(body.user);
             console.log(body.token);
             console.log(body.num);
 
-                       //console.log(body.description);
-//            body.description = body.description.trim();
-//            body.id = Id;
-//            testdata.push(body);
-//            Id++;
+            var gcm = new GCM(apiKey);
+            var regid = body.token;
+            var message = {
+                registration_id: regid, // required
+                collapse_key: 'Collapse key'
+                , 'data.key1': 'value1'
+                , 'data.key2': 'value2'
+            };
 
-            //Send GCM alert on POST
-            //GCM CONFIG
-            
-        
-
-        var gcm = new GCM(apiKey);
-        var regid = body.token;    
-        var message = {
-            registration_id: regid, // required
-            collapse_key: 'Collapse key'
-            , 'data.key1': 'value1'
-            , 'data.key2': 'value2'
-        };
-            
             gcm.send(message, function (err, messageId) {
                 if (err) {
                     console.log("Something has gone wrong!");
@@ -109,40 +91,11 @@
 
         });
 
-
-
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
+        //This will start Twilio SMS service, wifi signal low
 
         app.post('/sms', function (req, res) {
             var body = _.pick(req.body, 'wifi');
 
-            //Send GCM alert on POST
-            gcm.send(message, function (err, messageId) {
-                if (err) {
-                    console.log("Something has gone wrong!");
-                } else {
-                    console.log("Sent with message ID: ", messageId);
-                }
-            });
             //Send Twilio message on POST
             console.log(req);
             console.log(req.body);
@@ -167,7 +120,7 @@
 
                     }
                 });
-                
+
                 client.sendMessage({
 
                     to: '+19492937594', // Any number Twilio can deliver to
@@ -195,13 +148,6 @@
         });
 
 
-
-
-
-
-
-
-
         //DELETE /data/:id
         app.delete('/data/:id', function (req, res) {
             var Id = parseInt(req.params.id);
@@ -217,6 +163,7 @@
 
 
         });
+
 
         //PUT (UPDATE) /data/:id
         app.put('/data/:id', function (req, res) {
