@@ -117,6 +117,8 @@ module.exports = function (app) {
     app.post('/wifi', function (req, res) {
         var body = _.pick(req.body, 'name', 'token','num', 'wifi');
         console.log(body.name);
+        console.log(body.num);
+        console.log(body.wifi);
         
         //var message = new gcm.Message();
         
