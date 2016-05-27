@@ -43,7 +43,7 @@ module.exports = function (app){
           var sender = new gcm.Sender('AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM');  
         
         var registrationTokens = [];
-registrationTokens.push('c2SFnrpacZg:APA91bEc3lODfr7EoxmLqU16KZsWiosBWhhig4f1pIGSvwIBf2eQgNyxRnNZw_iCksup1IYL_rHQTW6YYyNLGeiuTSbPOENuMSfJFjxGF6cimm4J97EZOd9y__n9klwEtvX9dBUkcaH1');
+registrationTokens.push('eigiIAk2wUM:APA91bGiJTymPOoqsxp5zqsEv4jj6DJYnRB2qxiwdbiGaoQwcTmDV_eWXPQPLxCxPPAXaOnMhDlyHh1NsObxO6JmGbSuPVm_qXhqOz4LmD-z7gsTQhBKEJfAISAx9qUkJxuZoYMk55NS');
 
         sender.sendNoRetry(message, { registrationTokens: registrationTokens }, function(err, response) {
   if(err) console.error(err);
