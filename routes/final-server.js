@@ -28,7 +28,7 @@ module.exports = function (app){
     contentAvailable: true,
     delayWhileIdle: true,
     timeToLive: 3,
-    restrictedPackageName: "somePackageName",
+    
     dryRun: true,
     data: {
         key1: 'message1',
