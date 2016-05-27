@@ -3,7 +3,7 @@ var express = require('express');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
 var app = express();
-var routes = require('./routes/final-server')(app);
+var routes = require('./routes/scratchpad-server')(app);
 var PORT = process.env.PORT || 3000;
 var db;
 
