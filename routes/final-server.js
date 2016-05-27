@@ -44,7 +44,7 @@ module.exports = function (app){
         
         var registrationTokens = [];
 registrationTokens.push('c2SFnrpacZg:APA91bEc3lODfr7EoxmLqU16KZsWiosBWhhig4f1pIGSvwIBf2eQgNyxRnNZw_iCksup1IYL_rHQTW6YYyNLGeiuTSbPOENuMSfJFjxGF6cimm4J97EZOd9y__n9klwEtvX9dBUkcaH1');
-registrationTokens.push('fKp3WaVSsNI:APA91bFnAHkydqqbLdytF2RGdsNpjSFA7TcIvnZIx5fwfvAXfNkPrW_jEOVPBvxnXZeFLReOVE9eTUY8pvafxikFNUjveWUOPF4y2OLBlLvOOB1Hl8vKzVWgxMJ5AS0FR-ybW4zkYVe8');
+
         sender.sendNoRetry(message, { registrationTokens: registrationTokens }, function(err, response) {
   if(err) console.error(err);
   else    console.log(response);
