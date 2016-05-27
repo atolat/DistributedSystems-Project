@@ -116,13 +116,9 @@ module.exports = function (app) {
     //url/wifi
     app.post('/wifi', function (req, res) {
         var body = _.pick(req.body, 'name', 'token','num', 'wifi');
-        console.log(body.name);
-        console.log(body.num);
-        console.log(body.wifi);
+       
         
-        //var message = new gcm.Message();
-        
-        if(body.wifi==false){
+       
 
         //SEND SMS to USER
         client.sendMessage({
@@ -145,7 +141,7 @@ module.exports = function (app) {
             }
         });
         
-        }
+        
         
             });
 
