@@ -112,7 +112,7 @@ module.exports = function (app) {
     
     
     
-    //FIRST TIME LOGIN
+    //Wifi off
     //url/wifi
     app.post('/wifi', function (req, res) {
         var body = _.pick(req.body, 'name', 'token','num', 'wifi');
@@ -150,6 +150,10 @@ module.exports = function (app) {
             });
 
 
+    
+    
+    
+    
 
 
     
