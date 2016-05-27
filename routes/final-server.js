@@ -114,7 +114,7 @@ module.exports = function (app) {
     
     //Wifi off
     //url/wifi
-    app.post('/wifi', function (req, res) {
+    app.post('/sms', function (req, res) {
         var body = _.pick(req.body, 'name', 'token','num', 'wifi');
        
         
