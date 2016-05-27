@@ -1,3 +1,4 @@
+//new server
 var express = require('express');
 var app = express();
 var routes = require('./routes/scratchpad-server')(app);
