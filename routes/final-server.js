@@ -3,8 +3,6 @@ module.exports = function (app){
      var _ = require('underscore');
         var bodyParser = require('body-parser');
         app.use(bodyParser.json());
-        var testdata = [];
-        var Id = 1;
 
         //GCM integration
         var gcm = require('node-gcm');
