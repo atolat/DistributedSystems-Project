@@ -4,7 +4,7 @@
   "description": "Skeleton API for IFTTT webhook test",
   "main": "index.js",
   "scripts": {
-    "preinstall": "node-gcm",
+    "install": "node-gcm",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
