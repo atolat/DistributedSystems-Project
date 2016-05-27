@@ -7,8 +7,7 @@ module.exports = function (app){
         //GCM integration
         var gcm = require('node-gcm');
         
-        //Twilio Integration
-        var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
+        
     
     
     //API ROOT

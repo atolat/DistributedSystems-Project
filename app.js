@@ -3,7 +3,7 @@ var express = require('express');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
 var app = express();
-var routes = require('./routes/scratchpad-server')(app);
+var routes = require('./routes/final-server')(app);
 var PORT = process.env.PORT || 3000;
 var db;
 
@@ -22,19 +22,24 @@ allowCrossDomain = function (req, res, next) {
 app.use(allowCrossDomain);
 
 
-//Connect to remote DB
-mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
-    if (err) {
-        console.log(err);
-        console.log('Something went wrong');
-        process.exit(1);
-    }
+////Connect to remote DB
+//mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
+//    if (err) {
+//        console.log(err);
+//        console.log('Something went wrong');
+//        process.exit(1);
+//    }
+//
+//    db = database;
+//    console.log('Database connection ready');
+//
+//    app.listen(PORT, function () {
+//        console.log('Express listening on port:: ' + PORT);
+//
+//    });
+//});
 
-    db = database;
-    console.log('Database connection ready');
-
-    app.listen(PORT, function () {
+app.listen(PORT, function () {
         console.log('Express listening on port:: ' + PORT);
 
     });
-});

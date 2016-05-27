@@ -4,7 +4,6 @@
   "description": "Skeleton API for IFTTT webhook test",
   "main": "index.js",
   "scripts": {
-    
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
