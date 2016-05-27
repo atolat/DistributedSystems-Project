@@ -22,23 +22,18 @@ module.exports = function (app){
             console.log(body.token);
             console.log(body.num);
 
-        var message = new gcm.Message({
-    collapseKey: 'demo',
-    priority: 'high',
-    contentAvailable: true,
-    delayWhileIdle: true,
-    timeToLive: 3,
-    
-    dryRun: true,
-    data: {
-        key1: 'message1',
-        key2: 'message2'
-    },
-    notification: {
-        title: "Hello, World",
-        icon: "ic_launcher",
-        body: "This is a notification that will be displayed ASAP."
-    }
+        var message = new gcm.Message();
+
+// Add notification payload as key value
+message.addNotification('title', 'Alert!!!');
+message.addNotification('body', 'Abnormal data access');
+message.addNotification('icon', 'ic_launcher');
+
+// as object
+message.addNotification({
+  title: 'Alert!!!',
+  body: 'Abnormal data access',
+  icon: 'ic_launcher'
 });
           var sender = new gcm.Sender('AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM');  
         
