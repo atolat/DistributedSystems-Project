@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var app = express();
 var routes = require('./routes/final-server')(app);
 var PORT = process.env.PORT || 3000;
-var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/nodeDB'
+var uristring = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/nodeDB'
 
 allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
