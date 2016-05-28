@@ -132,15 +132,16 @@ module.exports = function (app) {
     //WIFI
     //url/sms
     app.post('/sms', function (req, res) {
-        //var body = _.pick(req.body, 'name', 'token', 'num', 'wifi');
-        //console.log(body.name);
-        if(req.wifi==false){
+        var body = _.pick(req.body, 'name', 'token', 'num', 'wifi');
+        console.log(body.name);
+        console.log(body.wifi);
+        if(body.wifi==false){
         //SEND SMS to USER
         client.sendMessage({
 
-            to: req.num, // Any number Twilio can deliver to
+            to: body.num, // Any number Twilio can deliver to
             from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-            body: 'Hi, ' + req.name + ', Low WIFI, you will now receive sms notifications.' // body of the SMS message
+            body: 'Hi, ' + body.name + ', Low WIFI, you will now receive sms notifications.' // body of the SMS message
 
         }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
@@ -157,7 +158,7 @@ module.exports = function (app) {
         });
         }
       
-        //res.json(body);
+        res.json(body);
     });
 
 
