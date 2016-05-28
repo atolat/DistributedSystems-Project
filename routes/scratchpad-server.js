@@ -3,9 +3,7 @@
         var _ = require('underscore');
         var bodyParser = require('body-parser');
         app.use(bodyParser.json());
-        var testdata = [];
-        var Id = 1;
-
+        
         //GCM integration
         var GCM = require('gcm').GCM;
         var apiKey = 'AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM';

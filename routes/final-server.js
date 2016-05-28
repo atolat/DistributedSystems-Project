@@ -10,6 +10,9 @@ module.exports = function (app) {
     //Twilio Integration
     var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
      //var client1 = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
+    
+    //variable to maintain state of wifi
+    var wifi = true;
 
 
 
@@ -112,29 +115,13 @@ module.exports = function (app) {
     });
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //WIFI
     //url/sms
     app.post('/sms', function (req, res) {
         var body = _.pick(req.body, 'name', 'token', 'num', 'wifi');
         console.log(body.name);
         console.log(body.wifi);
+        wifi=body.wifi;
         if(body.wifi==false){
         //SEND SMS to USER
         client.sendMessage({
@@ -160,6 +147,68 @@ module.exports = function (app) {
       
         res.json(body);
     });
+    
+    
+//    //SENSOR POSTS
+//    //url/sensor
+//    app.post('/sensor', function (req, res) {
+//        var body = _.pick(req.body, 'sensorID','triggerID');  //look for user that matches sensorID in database 
+//        console.log(body.sensorID);
+//        console.log(body.triggerID);
+//        //Logic to find user from DB
+//        //..
+//        //..
+//        
+//        //Logic to find message to send to user from DB
+//        //..
+//        //..
+//        if(wifi==false){
+//        //SEND SMS to USER
+//        client.sendMessage({
+//
+//            to: user.num, // Any number Twilio can deliver to
+//            from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+//            body:trigger.message  // body of the SMS message get from DB
+//
+//        }, function (err, responseData) { //this function is executed when a response is received from Twilio
+//
+//            if (!err) { // "err" is an error received during the request, if any
+//
+//                // "responseData" is a JavaScript object containing data received from Twilio.
+//                // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
+//                // http://www.twilio.com/docs/api/rest/sending-sms#example-1
+//
+//                console.log(responseData.from); // outputs "+14506667788"
+//                console.log(responseData.body); // outputs "word to your mother."
+//
+//            }
+//        });
+//        }else{
+//            //Send GCM notification with message
+//             var message = new gcm.Message();
+//
+//        // Add notification payload as key value
+//        message.addNotification('title', 'SENSOR ALERT!!');
+//        message.addNotification('body', trigger.message);
+//        message.addNotification('icon', 'ic_launcher');
+//
+//        var sender = new gcm.Sender('AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM');
+//
+//        var registrationTokens = [];
+//        registrationTokens.push(user.token);
+//
+//        sender.sendNoRetry(message, {
+//            registrationTokens: registrationTokens
+//        }, function (err, response) {
+//            if (err) console.error(err);
+//            else console.log(response);
+//        });
+//            
+//        }
+//      
+//        res.json(body);
+//    });
+//    
 
 
 
