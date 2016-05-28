@@ -5,8 +5,7 @@ var mongoose = require('mongoose');
 var app = express();
 var routes = require('./routes/final-server')(app);
 var PORT = process.env.PORT || 3000;
-var db;
-
+var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/nodeDB'
 
 allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -22,26 +21,22 @@ allowCrossDomain = function (req, res, next) {
 app.use(allowCrossDomain);
 
 
-////Connect to remote DB
-//mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
-//    if (err) {
-//        console.log(err);
-//        console.log('Something went wrong');
-//        process.exit(1);
-//    }
-//
-//    db = database;
-//    console.log('Database connection ready');
-//
-//    app.listen(PORT, function () {
-//        console.log('Express listening on port:: ' + PORT);
-//
-//    });
-//});
-
+//Connect to mongoDB
+mongoose.connect(uristring,function(err, res){
+    if(err){
+        console.log('Error connecting to : '+uristring+'. '+err);
+    } else{
+        console.log('Successfully connected to: '+ uristring);
+        //Express Connection
 app.listen(PORT, function () {
         console.log('Express listening on port:: ' + PORT);
 
     });
+    }
+});
+
+
+
+
 
 
