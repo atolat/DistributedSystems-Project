@@ -3,6 +3,9 @@ module.exports = function (app) {
     var _ = require('underscore');
     var bodyParser = require('body-parser');
     app.use(bodyParser.json());
+    var mongoose = require('mongoose');
+    var userModel = require('./models/user');
+    var triggerModel = require('./models/user');
 
     //GCM integration
     var gcm = require('node-gcm');
@@ -29,6 +32,23 @@ module.exports = function (app) {
     app.post('/firstlogin', function (req, res) {
         var body = _.pick(req.body, 'name', 'token', 'num', 'num1', 'num2');
         console.log(body.name);
+        
+        //Add user to DB
+        var user = new userModel({
+            name: body.name,
+            token: body.token,
+            num: body.num,
+            num1: body.num1,
+            num2: body.num2
+        });
+        
+        user.save(function(err){
+            if(err) throw err;
+            
+            console.log('New user successfully saved');
+        });
+        
+        
         var message = new gcm.Message();
 
         // Add notification payload as key value
