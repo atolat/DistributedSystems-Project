@@ -22,21 +22,15 @@ app.use(allowCrossDomain);
 
 
 //Connect to mongoDB
-mongoose.connect(uristring,function(err, res){
-    if(err){
-        console.log('Error connecting to : '+uristring+'. '+err);
-    } else{
-        console.log('Successfully connected to: '+ uristring);
+mongoose.connect(uristring, function (err, res) {
+    if (err) {
+        console.log('Error connecting to : ' + uristring + '. ' + err);
+    } else {
+        console.log('Successfully connected to: ' + uristring);
         //Express Connection
-app.listen(PORT, function () {
-        console.log('Express listening on port:: ' + PORT);
+        app.listen(PORT, function () {
+            console.log('Express listening on port:: ' + PORT);
 
-    });
+        });
     }
 });
-
-
-
-
-
-
