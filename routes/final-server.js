@@ -134,13 +134,13 @@ module.exports = function (app) {
     app.post('/sms', function (req, res) {
         //var body = _.pick(req.body, 'name', 'token', 'num', 'wifi');
         //console.log(body.name);
-        if(body.wifi==false){
+        if(req.wifi==false){
         //SEND SMS to USER
         client.sendMessage({
 
-            to: body.num, // Any number Twilio can deliver to
+            to: req.num, // Any number Twilio can deliver to
             from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-            body: 'Hi, ' + body.name + ', Low WIFI, you will now receive sms notifications.' // body of the SMS message
+            body: 'Hi, ' + req.name + ', Low WIFI, you will now receive sms notifications.' // body of the SMS message
 
         }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
