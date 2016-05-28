@@ -1,5 +1,4 @@
-module.export=function(final-server){
-    var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
@@ -12,5 +11,5 @@ var userSchema = new Schema({
 
 
 var User = mongoose.model('User',userSchema);
-};
-//module.exports = User;
+
+module.exports = User;

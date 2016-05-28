@@ -3,6 +3,7 @@ var express = require('express');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
 var app = express();
+var userModel = require('./models/user')(app);
 var routes = require('./routes/finalserver')(app);
 var PORT = process.env.PORT || 3000;
 var uristring = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/nodeDB'
