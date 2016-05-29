@@ -55,6 +55,29 @@
     app.get('/', function (req, res) {
         res.send('API Root');
     });
+        
+        
+        
+     //GET XML for calls
+        //API ROOT
+    app.post('/call.xml', function (req, res) {
+        res.set('Content-Type','text/xml');
+        res.send(o2x({
+            '?xml version="1.0" encoding="utf-8"?' : null,
+            'Response':{
+                'Say': [{
+                    '@' : {
+                        'voice' : 'woman'
+                        
+                    },
+                    
+                    '#':'Alert from sensor one'
+                }]
+            
+        }}));
+        
+        console.log(res);
+    });
 
 
 
@@ -164,18 +187,7 @@
             }
         });
         
-//        client.makeCall({
-//
-//    to:'+1949300078', // Any number Twilio can call
-//    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-//    url: 'https://smart-notification-server.herokuapp.com/call.xml' // A URL that produces an XML document (TwiML) which contains instructions for the call
-//
-//}, function(err, responseData) {
-//
-//    //executed when the call has been initiated.
-//    console.log(responseData.from); // outputs "+14506667788"
-//
-//});
+
 
 
 
@@ -183,28 +195,25 @@
         res.json(body);
     });
         
+
+    //CALL TEST
+    //url/call
+    app.post('/call', function (req, res) {
+                client.makeCall({
+
+    to:'+1949300078', // Any number Twilio can call
+    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+    url: 'https://smart-notification-server.herokuapp.com/call.xml' // A URL that produces an XML document (TwiML) which contains instructions for the call
+
+}, function(err, responseData) {
+
+    //executed when the call has been initiated.
+    console.log(responseData.from); // outputs "+14506667788"
+
+});
+    });        
         
-        
-        //GET XML for calls
-        //API ROOT
-    app.post('/call.xml', function (req, res) {
-        res.set('Content-Type','text/xml');
-        res.send(o2x({
-            '?xml version="1.0" encoding="utf-8"?' : null,
-            'Response':{
-                'Say': [{
-                    '@' : {
-                        'voice' : 'woman'
-                        
-                    },
-                    
-                    '#':'Alert from sensor one'
-                }]
-            
-        }}));
-        
-        console.log(res);
-    });
+       
 
         
         
