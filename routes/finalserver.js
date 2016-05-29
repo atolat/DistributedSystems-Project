@@ -4,7 +4,7 @@ module.exports = function (app) {
     var bodyParser = require('body-parser');
     app.use(bodyParser.json());
     var mongoose = require('mongoose');
-    //var User = require('./models/user');
+    var User = require('./models/user')(app);
     //var triggerModel = require('./models/user');
 
     //GCM integration
