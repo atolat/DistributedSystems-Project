@@ -69,7 +69,8 @@
             token: body.token,
             num: body.num,
             num1: body.num1,
-            num2: body.num2
+            num2: body.num2,
+            sensorID: body.sensorID
         });
 
         user.save(function(err){
@@ -210,7 +211,7 @@
             console.log(body.sensorID);
             console.log(body.triggerID);
                         
-            User.findOne({sensorId: body.sensorID}, 
+            User.findOne({sensorID: body.sensorID}, 
             function(err,user){
                 if(err) console.log(err)
                 console.log(user);
