@@ -9,6 +9,7 @@
 
     //GCM integration
     var gcm = require('node-gcm');
+        var sender = new gcm.Sender('AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM');
 
     //Twilio Integration
     var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
@@ -71,12 +72,12 @@
         // Add notification payload as key value
        message.addNotification({
   title: 'Alert!!!',
-  body: 'Abnormal data access',
+  body: 'HELLO!!',
   icon: 'ic_launcher'
 });
 
 
-        var sender = new gcm.Sender('AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM');
+        
 
         var registrationTokens = [];
         registrationTokens.push(body.token);
