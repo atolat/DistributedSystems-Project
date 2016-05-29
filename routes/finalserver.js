@@ -4,6 +4,7 @@ module.exports = function (app) {
     var bodyParser = require('body-parser');
     app.use(bodyParser.json());
     var mongoose = require('mongoose');
+    var User = require('./models/user')(finalserver);
     //var User = require('./models/user');
     //var triggerModel = require('./models/user');
 
