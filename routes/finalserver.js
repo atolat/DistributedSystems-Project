@@ -216,6 +216,7 @@
                 if(err) console.log(err)
                 console.log(user);
             });
+            res.json(body);
             
             //Logic to find message to send to user from DB
             //..
