@@ -66,7 +66,7 @@
         });
 
 
-        var message = new gcm.Message();
+       // var message = new gcm.Message();
 
         // Add notification payload as key value
         var message = new gcm.Message({
