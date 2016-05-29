@@ -217,9 +217,12 @@
                 if(err) console.log(err)
                 console.log(users);
                 for(var i=0; i< users.length;i++){
+                    console.log(users[i])
                     client.sendMessage({
+                        
+                        
 
-            to: user[i].num, // Any number Twilio can deliver to
+            to: users[i].num, // Any number Twilio can deliver to
             from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
             body: 'Sensor Alert!!' // body of the SMS message
 
