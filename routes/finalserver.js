@@ -225,7 +225,7 @@
 
             to: users[i].num, // Any number Twilio can deliver to
             from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-            body: 'Sensor Alert!!' // body of the SMS message
+            body: 'Sensor Alert from sensor '+body.sensorID+'!!' // body of the SMS message
 
         }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
