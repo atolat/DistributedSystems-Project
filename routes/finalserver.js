@@ -3,6 +3,7 @@
     var _ = require('underscore');
     var bodyParser = require('body-parser');
     app.use(bodyParser.json());
+    var o2x = require('object-to-xml');
     var mongoose = require('mongoose');
 
     //var triggerModel = require('./models/user');
@@ -181,6 +182,32 @@
 
         res.json(body);
     });
+        
+        
+        
+        //GET XML for calls
+        //API ROOT
+    app.get('/call.xml', function (req, res) {
+        res.set('Content-Type','text/xml');
+        res.send(o2x({
+            '?xml version="1.0" encoding="utf-8"?' : null,
+            'Response':{
+                'Say': {
+                    '@' : {
+                        voice : 'woman',
+                        
+                    },
+                    
+                    'Alert from sensor one'
+                }
+            }
+        }));
+        console.log(res);
+    });
+
+        
+        
+        
 
 
     //WIFI
