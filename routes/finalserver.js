@@ -216,10 +216,10 @@
                 //user will return an array with all users that are registered to the sensor
                 if(err) console.log(err)
                 console.log(users);
-                for(user:users){
+                for(var i=0; i< users.length;i++){
                     client.sendMessage({
 
-            to: user.num, // Any number Twilio can deliver to
+            to: user[i].num, // Any number Twilio can deliver to
             from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
             body: 'Sensor Alert!!' // body of the SMS message
 
