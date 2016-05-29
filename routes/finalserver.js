@@ -164,18 +164,18 @@
             }
         });
         
-        client.makeCall({
-
-    to:'+1949300078', // Any number Twilio can call
-    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-    url: 'https://smart-notification-server.herokuapp.com/call.xml' // A URL that produces an XML document (TwiML) which contains instructions for the call
-
-}, function(err, responseData) {
-
-    //executed when the call has been initiated.
-    console.log(responseData.from); // outputs "+14506667788"
-
-});
+//        client.makeCall({
+//
+//    to:'+1949300078', // Any number Twilio can call
+//    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+//    url: 'https://smart-notification-server.herokuapp.com/call.xml' // A URL that produces an XML document (TwiML) which contains instructions for the call
+//
+//}, function(err, responseData) {
+//
+//    //executed when the call has been initiated.
+//    console.log(responseData.from); // outputs "+14506667788"
+//
+//});
 
 
 
