@@ -211,7 +211,7 @@
             console.log(body.sensorID);
             console.log(body.triggerID);
                         
-            User.findOne({sensorID: body.sensorID}, 
+            User.find({sensorID: body.sensorID}, 
             function(err,user){
                 if(err) console.log(err)
                 console.log(user);
