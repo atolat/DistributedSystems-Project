@@ -198,10 +198,11 @@
                         
                     },
                     
-                    'Alert from sensor one'
+                    '#':'Alert from sensor one'
                 }
-            }
-        }));
+            
+        }}));
+        
         console.log(res);
     });
 
