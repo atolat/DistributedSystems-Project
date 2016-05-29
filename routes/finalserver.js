@@ -4,7 +4,7 @@ module.exports = function (app) {
     var bodyParser = require('body-parser');
     app.use(bodyParser.json());
     var mongoose = require('mongoose');
-    var User = require('./models/user')(app);
+    
     //var triggerModel = require('./models/user');
 
     //GCM integration
@@ -16,6 +16,23 @@ module.exports = function (app) {
     
     //variable to maintain state of wifi
     var wifi = true;
+    
+    
+    
+    //Define DB Schemas
+    var Schema = mongoose.Schema;
+
+    var userSchema = new Schema({
+    name: String,
+    token: String,
+    num: String,
+    num1: String,
+    num2: String    
+    
+});
+
+
+var User = mongoose.model('User',userSchema);
 
 
 
