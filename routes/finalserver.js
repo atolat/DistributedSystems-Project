@@ -66,26 +66,13 @@
         });
 
 
-       // var message = new gcm.Message();
+       var message = new gcm.Message();
 
         // Add notification payload as key value
-        var message = new gcm.Message({
-    collapseKey: 'demo',
-    priority: 'high',
-    contentAvailable: true,
-    delayWhileIdle: true,
-    timeToLive: 3,
-    restrictedPackageName: "somePackageName",
-    dryRun: true,
-    data: {
-        key1: 'message1',
-        key2: 'message2'
-    },
-    notification: {
-        title: "Hello, World",
-        icon: "ic_launcher",
-        body: "This is a notification that will be displayed ASAP."
-    }
+       message.addNotification({
+  title: 'Alert!!!',
+  body: 'Abnormal data access',
+  icon: 'ic_launcher'
 });
 
 
