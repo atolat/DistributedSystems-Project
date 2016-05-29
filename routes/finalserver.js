@@ -37,7 +37,7 @@
     var User = mongoose.model('User',userSchema);
     
     //Trigger Schema    
-    var triggerSchema = mongoose.Schem({
+    var triggerSchema = mongoose.Schema({
     
     sensorID: String,
     triggerID: String,
