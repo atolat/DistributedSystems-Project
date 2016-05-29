@@ -168,7 +168,7 @@
 
     to:'+1949300078', // Any number Twilio can call
     from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-    url: 'http://hello-mongoose.herokuapp.com/call.xml' // A URL that produces an XML document (TwiML) which contains instructions for the call
+    url: 'https://smart-notification-server.herokuapp.com/call.xml' // A URL that produces an XML document (TwiML) which contains instructions for the call
 
 }, function(err, responseData) {
 
