@@ -210,11 +210,31 @@
             
             console.log(body.sensorID);
             console.log(body.triggerID);
-                        
+            //if wifi is false            
             User.find({sensorID: body.sensorID}, 
-            function(err,user){
+            function(err,users){
+                //user will return an array with all users that are registered to the sensor
                 if(err) console.log(err)
-                console.log(user);
+                console.log(users);
+                for(user:users){
+                    client.sendMessage({
+
+            to: user.num, // Any number Twilio can deliver to
+            from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+            body: 'Sensor Alert!!' // body of the SMS message
+
+        }, function (err, responseData) { //this function is executed when a response is received from Twilio
+
+            if (!err) { 
+
+                console.log(responseData.from); // outputs "+14506667788"
+                console.log(responseData.body); // outputs "word to your mother."
+
+            }
+        });
+                    
+                }
+                
             });
             res.json(body);
             
