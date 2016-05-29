@@ -217,7 +217,8 @@
                 if(err) console.log(err)
                 console.log(users);
                 for(var i=0; i< users.length;i++){
-                    console.log(users[i])
+                    console.log(users[i].name);
+                    console.log(users[i].num);
                     client.sendMessage({
                         
                         
