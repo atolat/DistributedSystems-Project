@@ -60,7 +60,7 @@
         
      //GET XML for calls
         //API ROOT
-    app.post('/call.xml', function (req, res) {
+    app.post('/call', function (req, res) {
         res.set('Content-Type','text/xml');
         res.send(o2x({
             '?xml version="1.0" encoding="utf-8"?' : null,
@@ -198,7 +198,7 @@
 
     //CALL TEST
     //url/call
-    app.post('/call', function (req, res) {
+    app.post('/callme', function (req, res) {
                 client.makeCall({
 
     to:'+1949300078', // Any number Twilio can call
