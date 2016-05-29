@@ -192,14 +192,14 @@
         res.send(o2x({
             '?xml version="1.0" encoding="utf-8"?' : null,
             'Response':{
-                'Say': {
+                'Say': [{
                     '@' : {
                         voice : 'woman'
                         
                     },
                     
                     '#':'Alert from sensor one'
-                }
+                }]
             
         }}));
         
