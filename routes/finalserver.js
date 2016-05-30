@@ -294,11 +294,19 @@
             
             console.log(body.sensorID);
             console.log(body.triggerID);
-            //if wifi is false            
+            //if wifi is false       
+            
+            Trigger.findOne({sensorID : body.sensorID, triggerID: body.triggerID}, function(err, trigger){
+                if(err) console.log(err);
+                
+                console.log(trigger.message);
+            })
+            
+            
             User.find({sensorID: body.sensorID}, 
             function(err,users){
                 //user will return an array with all users that are registered to the sensor
-                if(err) console.log(err)
+                if(err) console.log(err);
                 console.log(users);
                 for(var i=0; i< users.length;i++){
                     console.log(users[i].name);
