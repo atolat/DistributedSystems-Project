@@ -70,7 +70,7 @@
                         
                     },
                     
-                    '#':'PP is a handsome boy, he has big muscles.'
+                    '#':'Insert Voice message here.'
                 }]
             
         }}));
