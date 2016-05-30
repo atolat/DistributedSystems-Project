@@ -70,7 +70,7 @@
                         
                     },
                     
-                    '#':'Alert from sensor one'
+                    '#':'Hi Kapse, It worked.'
                 }]
             
         }}));
