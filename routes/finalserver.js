@@ -43,12 +43,11 @@
     sensorID: String,
     triggerID: String,
     message: String,
-    num1: String,
-    num2: String 
-    
+        
     });
 
     var Trigger = mongoose.model('Trigger',triggerSchema);
+    
 
 
     //API ROOT
@@ -110,7 +109,7 @@
        message.addNotification({
   title: 'Alert!!!',
   body: 'HELLO!!',
-  icon: 'ic_launcher'
+  icon: '@drawable/ic_launcher'
 });
 
 
@@ -253,6 +252,16 @@
         res.json(body);
     });
 
+        
+        //Registering a sensor to the service
+        //Sensor can make post request to this url to add messages corresponding to triggerIDs
+        //..
+        //..
+        
+        
+        
+        
+        
 
         //SENSOR POSTS
         //url/sensor
@@ -298,5 +307,13 @@
             //..
         
     });
+        
+        
+        
+        
+        
+        
+        
+        
     }
                  
