@@ -173,7 +173,7 @@
 
             to: body.num2, // Any number Twilio can deliver to
             from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-            body: 'Hi, ' + body.name + ' has added you to our service!!' // body of the SMS message
+            body: 'Hi, ' + body.name + ' you have been subscribed to Arpan\'s sensor.' // body of the SMS message
 
         }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
