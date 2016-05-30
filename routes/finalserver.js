@@ -70,7 +70,7 @@
                         
                     },
                     
-                    '#':'PP is a handsome boy, he has a big ass.'
+                    '#':'Insert message here'
                 }]
             
         }}));
@@ -208,7 +208,7 @@
     console.log(responseData.from); // outputs "+14506667788"
 
 });
-        res.json(body);
+        res.json(req);
     });        
         
        
