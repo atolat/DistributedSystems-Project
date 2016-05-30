@@ -267,9 +267,9 @@
 
         //Add trigger to DB
         var trigger = new Trigger({
-            sensorID: String,
-            triggerID: String,
-            message: String
+            sensorID: body.sensorID,
+            triggerID: body.triggerID,
+            message: body.message
         });
 
         trigger.save(function(err){
