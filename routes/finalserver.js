@@ -300,7 +300,7 @@
                 if(err) console.log(err);
                 console.log(trigger);
                 console.log(trigger.message);
-            });
+            
             
             
             User.find({sensorID: body.sensorID}, 
@@ -317,7 +317,7 @@
 
             to: users[i].num, // Any number Twilio can deliver to
             from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-            body: 'Arpan is in trouble -alert from sensor 1!!' // body of the SMS message
+            body: trigger.message // body of the SMS message
 
         }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
@@ -332,6 +332,8 @@
                 }
                 
             });
+                
+                });
             res.json(body);
             
             //Logic to find message to send to user from DB
