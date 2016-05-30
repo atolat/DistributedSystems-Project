@@ -89,7 +89,10 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
         numDigits: "1",
         method: "POST"
     }, function (node) {
-        node.play("http://howtodocs.s3.amazonaws.com/et-phone.mp3", {loop: 3});
+         node.say("To call the planet Broh doe As O G, press 2. To call the planet " +
+            "DuhGo bah, press 3. To call an oober asteroid to your location, press 4. To " +
+            "go back to the main menu, press the star key ",
+            {voice: "alice", language: "en-GB", loop: 3});
     });
     response.send(twiml);
 });
