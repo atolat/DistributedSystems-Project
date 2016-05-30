@@ -14,7 +14,7 @@
 
     //Twilio Integration
     var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
-    //var client1 = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
+    
 
     //variable to maintain state of wifi
     var wifi = true;
@@ -57,27 +57,55 @@
         
         
         
-     //GET XML for calls
-        //API ROOT
-    app.post('/call', function (req, res) {
-        res.set('Content-Type','text/xml');
-        res.send(o2x({
-            '?xml version="1.0" encoding="utf-8"?' : null,
-            'Response':{
-                'Say': [{
-                    '@' : {
-                        'voice' : 'woman'
-                        
-                    },
-                    
-                    '#':'Insert message here'
-                }]
-            
-        }}));
-        
-        console.log(res);
-    });
+//     //GET XML for calls
+//        //API ROOT
+//    app.post('/call', function (req, res) {
+//        res.set('Content-Type','text/xml');
+//        res.send(o2x({
+//            '?xml version="1.0" encoding="utf-8"?' : null,
+//            'Response':{
+//                'Say': [{
+//                    '@' : {
+//                        'voice' : 'woman'
+//                        
+//                    },
+//                    
+//                    '#':'Insert message here'
+//                }]
+//            
+//        }}));
+//        
+//        console.log(res);
+//    });
 
+ //----------------------------------------------------------------------------------------------------------------------------------------------       
+    //Simple call test
+        // POST: '/call'
+app.post('/call', client.webhook({validate: false}), function (request, response) {
+    var twiml = new client.TwimlResponse();
+    twiml.gather({
+        action: "/ack",
+        numDigits: "1",
+        method: "POST"
+    }, function (node) {
+        node.play("http://howtodocs.s3.amazonaws.com/et-phone.mp3", {loop: 3});
+    });
+    response.send(twiml);
+});
+        
+        //CALL TEST
+    //url/ack
+    app.post('/ack', function (req, res) {
+        console.log('received ACK');        
+        res.send('received ACK');
+    });        
+        
+//-----------------------------------------------------------------------------------------------------------------------------------------------        
+        
+        
+        
+        
+        
 
 
     //FIRST TIME LOGIN
@@ -271,7 +299,7 @@
         trigger.save(function(err){
             if(err) throw err;
 
-            console.log('Trigger from sensor: '+body.sensorID+' saved!');
+            console.log('Trigger from sensor: '+body.sensorID+' saved, with trigger id: '+body.triggerID+' and message: '+body.message+' .');
         });
 
             res.json(body);
@@ -324,6 +352,8 @@
 
             }
         });
+                    
+                    //Call user with trigger alert
                     
                 }
                 
