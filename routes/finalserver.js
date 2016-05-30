@@ -106,11 +106,14 @@
        var message = new gcm.Message();
 
         // Add notification payload as key value
-       message.addNotification({
-  title: 'Alert!!!',
-  body: 'HELLO!!',
-  icon: '@drawable/ic_launcher'
-});
+//       message.addNotification({
+//  title: 'Alert!!!',
+//  body: 'HELLO!!',
+//  icon: '@drawable/ic_launcher'
+//});
+         message.addData('title','İş Geliştirme Platformu');
+                    message.addData('message','Yeni İleti');
+                    message.addData('msgcnt','1');
 
 
         
