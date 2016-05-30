@@ -14,6 +14,7 @@
 
     //Twilio Integration
     var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
+    var twilio = require('twilio');
     
 
     //variable to maintain state of wifi
@@ -81,8 +82,8 @@
  //----------------------------------------------------------------------------------------------------------------------------------------------       
     //Simple call test
         // POST: '/call'
-app.post('/call', client.webhook({validate: false}), function (request, response) {
-    var twiml = new client.TwimlResponse();
+app.post('/call', twilio.webhook({validate: false}), function (request, response) {
+    var twiml = new twilio.TwimlResponse();
     twiml.gather({
         action: "/ack",
         numDigits: "1",
