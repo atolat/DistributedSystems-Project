@@ -70,7 +70,7 @@
                         
                     },
                     
-                    '#':'It worked, It worked, It worked, It worked.'
+                    '#':'PP is a handsome boy, he has big muscles.'
                 }]
             
         }}));
@@ -105,12 +105,7 @@
 
        var message = new gcm.Message();
 
-        // Add notification payload as key value
-//       message.addNotification({
-//  title: 'Alert!!!',
-//  body: 'HELLO!!',
-//  icon: '@drawable/ic_launcher'
-//});
+ 
         
                     message.addData('message','Hi! '+body.name+' ,you have been registered to our service.');
                     message.addData('msgcnt','1');
