@@ -111,8 +111,8 @@
 //  body: 'HELLO!!',
 //  icon: '@drawable/ic_launcher'
 //});
-         message.addData('title','İş Geliştirme Platformu');
-                    message.addData('message','Yeni İleti');
+        
+                    message.addData('message','Hi! '+body.name+' ,you have been registered to our service.');
                     message.addData('msgcnt','1');
 
 
