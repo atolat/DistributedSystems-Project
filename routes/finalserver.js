@@ -258,8 +258,29 @@
         
         //Registering a sensor to the service
         //Sensor can make post request to this url to add messages corresponding to triggerIDs
-        //..
-        //..
+       
+        app.post('/sensorreg', function (req, res) {
+        var body = _.pick(req.body, 'sensorID', 'triggerID', 'message');
+        console.log(body.sensorID);
+        console.log(body.triggerID);
+        console.log(body.message);
+
+        //Add user to DB
+        var trigger = new Trigger({
+            sensorID: String,
+            triggerID: String,
+            message: String
+        });
+
+        trigger.save(function(err){
+            if(err) throw err;
+
+            console.log('Trigger from sensor: '+body.sensorID+' saved!');
+        });
+
+            res.json(body);
+        
+    });
         
         
         
