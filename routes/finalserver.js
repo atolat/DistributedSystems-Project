@@ -296,11 +296,11 @@
             console.log(body.triggerID);
             //if wifi is false       
             
-            Trigger.findOne({sensorID : body.sensorID, triggerID: body.triggerID}, function(err, trigger){
+            Trigger.find({sensorID : body.sensorID, triggerID: body.triggerID}, function(err, trigger){
                 if(err) console.log(err);
-                
+                console.log(trigger);
                 console.log(trigger.message);
-            })
+            });
             
             
             User.find({sensorID: body.sensorID}, 
