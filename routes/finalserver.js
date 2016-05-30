@@ -265,7 +265,7 @@
         console.log(body.triggerID);
         console.log(body.message);
 
-        //Add user to DB
+        //Add trigger to DB
         var trigger = new Trigger({
             sensorID: String,
             triggerID: String,
