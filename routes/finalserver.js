@@ -42,7 +42,7 @@
     
     sensorID: String,
     triggerID: String,
-    message: String,
+    message: String
         
     });
 
