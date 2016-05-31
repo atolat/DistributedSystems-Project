@@ -34,8 +34,10 @@
             , num1: String
             , num2: String
             , sensorID: String
+            , wifi: Boolean
 
         });
+
         var User = mongoose.model('User', userSchema);
 
         //Trigger Schema    
@@ -185,11 +187,6 @@
         //-----------------------------------------------------------------------------------------------------------------------------------------------        
 
 
-
-
-
-
-
         //FIRST TIME LOGIN
         //url/firstlogin
         app.post('/firstlogin', function (req, res) {
@@ -204,6 +201,7 @@
                 , num1: body.num1
                 , num2: body.num2
                 , sensorID: body.sensorID
+                , wifi: true
             });
 
             user.save(function (err) {
@@ -316,32 +314,6 @@
             res.json(body);
         });
 
-        //
-        //    //CALL TEST
-        //    //url/call
-        //    app.post('/callme', function (req, res) {
-        //                client.makeCall({
-        //
-        //    to:'+19492937594', // Any number Twilio can call
-        //    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-        //    url: 'https://smart-notification-server.herokuapp.com/call' // A URL that produces an XML document (TwiML) which contains instructions for the call
-        //
-        //}, function(err, responseData) {
-        //
-        //    //executed when the call has been initiated.
-        //    console.log(responseData.from); // outputs "+14506667788"
-        //
-        //});
-        //        res.json(req);
-        //    });        
-        //        
-
-
-
-
-
-
-
         //WIFI
         //url/sms
         app.post('/sms', function (req, res) {
@@ -350,6 +322,26 @@
             console.log(body.wifi);
             wifi = body.wifi;
             if (body.wifi == false) {
+                //Update wifi flag in DB
+                User.findOneAndUpdate({
+                    name: body.name
+                }, {
+                    wifi: false
+                }, function (err, user) {
+                    if (err) throw err;
+
+                    // we have the updated user returned to us
+                    console.log(user);
+                });
+
+
+
+
+
+
+
+
+
                 //SEND SMS to USER
                 client.sendMessage({
 
@@ -474,9 +466,6 @@
             });
             res.json(body);
 
-            //Logic to find message to send to user from DB
-            //..
-            //..
 
         });
 
