@@ -97,7 +97,7 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
         
    //CALL TEST
     //url/ack
-    app.post('/ack', function (req, res) {
+    app.post('/ack', twilio.webhook({validate: false}), function (req, res) {
        
         var twiml = new twilio.TwimlResponse();
         twiml.say("Thank you for acknowledging the alert.");
