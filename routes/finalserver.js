@@ -6,8 +6,6 @@
         var o2x = require('object-to-xml');
         var mongoose = require('mongoose');
 
-
-
         //GCM integration
         var gcm = require('node-gcm');
         var sender = new gcm.Sender('AIzaSyDdMT2Y1-OZFLOTLI1haEPoudYSuz38KRM');
@@ -15,12 +13,6 @@
         //Twilio Integration
         var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
         var twilio = require('twilio');
-
-
-        //variable to maintain state of wifi
-        var wifi = true;
-
-
 
         //Define DB Schemas
         //User Schema
@@ -51,15 +43,10 @@
 
         var Trigger = mongoose.model('Trigger', triggerSchema);
 
-
-
         //API ROOT
         app.get('/', function (req, res) {
             res.send('API Root');
         });
-
-
-        //----------------------------------------------------------------------------------------------------------------------------------------------       
 
         // POST: '/callfirst'
         app.post('/callfirst1', twilio.webhook({
@@ -100,13 +87,7 @@
             response.send(twiml);
         });
 
-
-
-
-
-
-
-        //Simple call test
+        //Notification Alert Call
         // POST: '/call'
         app.post('/call1', twilio.webhook({
             validate: false
@@ -146,27 +127,6 @@
             response.send(twiml);
         });
 
-        app.post('/call3', twilio.webhook({
-            validate: false
-        }), function (request, response) {
-            console.log(request.body);
-            var twiml = new twilio.TwimlResponse();
-            twiml.gather({
-                action: "/ack"
-                , numDigits: "1"
-                , method: "POST"
-            }, function (node) {
-                node.say("You are receiving this call to alert you about a notification from sensor three. Press one to acknowledge.", {
-                    voice: "alice"
-                    , language: "en-GB"
-                    , loop: 3
-                });
-            });
-            response.send(twiml);
-        });
-
-
-
         //CALL TEST
         //url/ack
         app.post('/ack', twilio.webhook({
@@ -184,9 +144,7 @@
             res.send(twiml.toString());
         });
 
-        //-----------------------------------------------------------------------------------------------------------------------------------------------        
-
-
+        
         //FIRST TIME LOGIN
         //url/firstlogin
         app.post('/firstlogin', function (req, res) {
@@ -212,15 +170,8 @@
 
 
             var message = new gcm.Message();
-
-
-
             message.addData('message', 'Hi! ' + body.name + ' ,you have been registered to our service.');
             message.addData('msgcnt', '1');
-
-
-
-
             var registrationTokens = [];
             registrationTokens.push(body.token);
 
@@ -245,8 +196,8 @@
                     // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
                     // http://www.twilio.com/docs/api/rest/sending-sms#example-1
 
-                    console.log(responseData.from); // outputs "+14506667788"
-                    console.log(responseData.body); // outputs "word to your mother."
+                    console.log(responseData.from);
+                    console.log(responseData.body);
 
                 }
             });
@@ -264,6 +215,7 @@
                 //console.log(responseData.from); // outputs "+14506667788"
 
             });
+           
             //SEND SMS to NUM1
             client.sendMessage({
 
@@ -306,15 +258,10 @@
                 }
             });
 
-
-
-
-
-
             res.json(body);
         });
 
-        //WIFI
+        //WIFI- To track wifi status for a user
         //url/sms
         app.post('/sms', function (req, res) {
             var body = _.pick(req.body, 'name', 'token', 'num', 'wifi');
@@ -329,22 +276,11 @@
                     wifi: false
                 }, function (err, user) {
                     if (err) throw err;
-
-                    // we have the updated user returned to us
                     console.log(user);
                 });
 
-
-
-
-
-
-
-
-
                 //SEND SMS to USER
                 client.sendMessage({
-
                     to: body.num, // Any number Twilio can deliver to
                     from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
                     body: 'Hi, ' + body.name + ', Low WIFI, you will now receive sms notifications.' // body of the SMS message
@@ -367,10 +303,8 @@
             res.json(body);
         });
 
-
         //Registering a sensor to the service
         //Sensor can make post request to this url to add messages corresponding to triggerIDs
-
         app.post('/sensorreg', function (req, res) {
             var body = _.pick(req.body, 'sensorID', 'triggerID', 'message');
             console.log(body.sensorID);
@@ -380,24 +314,16 @@
             //Add trigger to DB
             var trigger = new Trigger({
                 sensorID: body.sensorID
-                , triggerID: body.triggerID
-                , message: body.message
+                ,triggerID: body.triggerID
+                ,message: body.message
             });
 
             trigger.save(function (err) {
                 if (err) throw err;
-
                 console.log('Trigger from sensor: ' + body.sensorID + ' saved, with trigger id: ' + body.triggerID + ' and message: ' + body.message + ' .');
             });
-
             res.json(body);
-
         });
-
-
-
-
-
 
         //SENSOR POSTS
         //url/sensor
@@ -406,8 +332,7 @@
 
             console.log(body.sensorID);
             console.log(body.triggerID);
-            //if wifi is false       
-
+        
             Trigger.findOne({
                 sensorID: body.sensorID
                 , triggerID: body.triggerID
@@ -415,8 +340,6 @@
                 if (err) console.log(err);
                 console.log(trigger);
                 console.log(trigger.message);
-
-
 
                 User.find({
                         sensorID: body.sensorID
@@ -478,8 +401,6 @@
 
             });
             res.json(body);
-
-
-        });
+    });
 
     }
