@@ -98,6 +98,11 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
    //CALL TEST
     //url/ack
     app.post('/ack', function (req, res) {
+        var selectedOption = request.body.Digits;
+        var twiml = new twilio.TwimlResponse();
+        twiml.say("Thank you for acknowledging the alert.");
+
+        twiml.hangup();
         console.log('received ACK');        
         res.send('received ACK');
     });        
