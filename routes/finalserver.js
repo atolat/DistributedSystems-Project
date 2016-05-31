@@ -100,7 +100,10 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
     app.post('/ack', twilio.webhook({validate: false}), function (req, res) {
        
         var twiml = new twilio.TwimlResponse();
-        twiml.hangup();
+        twiml
+    .say('Thanks for the acknowledgement . Goodbye',
+         { voice: 'alice', language: 'en-GB' })
+    .hangup();
         console.log('received ACK');        
         res.send('received ACK');
     });        
