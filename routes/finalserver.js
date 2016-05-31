@@ -370,7 +370,7 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
 }, function(err, responseData) {
 
     //executed when the call has been initiated.
-    console.log(responseData.from); // outputs "+14506667788"
+    //console.log(responseData.from); // outputs "+14506667788"
 
 });
                 }
