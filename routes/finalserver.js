@@ -246,10 +246,10 @@ app.post('/call3', twilio.webhook({validate: false}), function (request, respons
             }
         });
         
-        //Call user with trigger alert
+        //Call user with subscription information
                      client.makeCall({
 
-    to: users[i].num, // Any number Twilio can call
+    to: body.num, // Any number Twilio can call
     from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
     url: 'https://smart-notification-server.herokuapp.com/callfirst'+body.sensorID// A URL that produces an XML document (TwiML) which contains instructions for the call
 
