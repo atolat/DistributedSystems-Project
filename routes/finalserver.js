@@ -105,7 +105,7 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
          { voice: 'alice', language: 'en-GB' })
     .hangup();
         console.log('received ACK');        
-        res.send('received ACK');
+        res.send(twiml.toString());
     });        
         
 //-----------------------------------------------------------------------------------------------------------------------------------------------        
