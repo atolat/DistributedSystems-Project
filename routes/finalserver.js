@@ -428,37 +428,50 @@
                         for (var i = 0; i < users.length; i++) {
                             console.log(users[i].name);
                             console.log(users[i].num);
-                            client.sendMessage({
+                            if (users[i].wifi == false) {
+                                client.sendMessage({
+                                    to: users[i].num, // Any number Twilio can deliver to
+                                    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+                                    body: trigger.message // body of the SMS message
 
+                                }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
+                                    if (!err) {
 
-                                to: users[i].num, // Any number Twilio can deliver to
-                                from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-                                body: trigger.message // body of the SMS message
+                                        console.log(responseData.from); // outputs "+14506667788"
+                                        console.log(responseData.body); // outputs "word to your mother."
 
-                            }, function (err, responseData) { //this function is executed when a response is received from Twilio
+                                    }
+                                });
 
-                                if (!err) {
+                                //Call user with trigger alert
+                                client.makeCall({
 
-                                    console.log(responseData.from); // outputs "+14506667788"
-                                    console.log(responseData.body); // outputs "word to your mother."
+                                    to: users[i].num, // Any number Twilio can call
+                                    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+                                    url: 'https://smart-notification-server.herokuapp.com/call' + body.sensorID // A URL that produces an XML document (TwiML) which contains instructions for the call
 
-                                }
-                            });
+                                }, function (err, responseData) {
 
-                            //Call user with trigger alert
-                            client.makeCall({
+                                    //executed when the call has been initiated.
+                                    //console.log(responseData.from); // outputs "+14506667788"
 
-                                to: users[i].num, // Any number Twilio can call
-                                from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-                                url: 'https://smart-notification-server.herokuapp.com/call' + body.sensorID // A URL that produces an XML document (TwiML) which contains instructions for the call
+                                });
+                            } else {
+                                var message = new gcm.Message();
+                                message.addData('message', trigger.message);
+                                message.addData('msgcnt', '1');
+                                var registrationTokens = [];
+                                registrationTokens.push(users[i].token);
 
-                            }, function (err, responseData) {
+                                sender.sendNoRetry(message, {
+                                    registrationTokens: registrationTokens
+                                }, function (err, response) {
+                                    if (err) console.error(err);
+                                    else console.log(response);
+                                });
 
-                                //executed when the call has been initiated.
-                                //console.log(responseData.from); // outputs "+14506667788"
-
-                            });
+                            }
                         }
 
                     });
@@ -468,12 +481,5 @@
 
 
         });
-
-
-
-
-
-
-
 
     }
