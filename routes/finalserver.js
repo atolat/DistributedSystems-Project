@@ -80,7 +80,43 @@
 //    });
 
  //----------------------------------------------------------------------------------------------------------------------------------------------       
-    //Simple call test
+   
+   // POST: '/callfirst'
+app.post('/callfirst1', twilio.webhook({validate: false}), function (request, response) {
+    console.log(request.body);
+    var twiml = new twilio.TwimlResponse();
+    twiml.gather({
+        action: "/ack",
+        numDigits: "1",
+        method: "POST"
+    }, function (node) {
+         node.say("Hi, you have been added to the smart notification service. You have been subscribed to sensor one. Press one to acknowledge.",
+            {voice: "alice", language: "en-GB", loop: 3});
+    });
+    response.send(twiml);
+});    
+        
+app.post('/callfirst2', twilio.webhook({validate: false}), function (request, response) {
+    console.log(request.body);
+    var twiml = new twilio.TwimlResponse();
+    twiml.gather({
+        action: "/ack",
+        numDigits: "1",
+        method: "POST"
+    }, function (node) {
+         node.say("Hi, you have been added to the smart notification service. You have been subscribed to sensor two. Press one to acknowledge.",
+            {voice: "alice", language: "en-GB", loop: 3});
+    });
+    response.send(twiml);
+});    
+        
+        
+        
+        
+        
+          
+        
+        //Simple call test
         // POST: '/call'
 app.post('/call1', twilio.webhook({validate: false}), function (request, response) {
     console.log(request.body);
@@ -194,7 +230,7 @@ app.post('/call3', twilio.webhook({validate: false}), function (request, respons
 
             to: body.num, // Any number Twilio can deliver to
             from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-            body: 'Hi, ' + body.name + ' you have been connected to our service!!' // body of the SMS message
+            body: 'Hi, ' + body.name + ' you have been connected to our service and subscribed to sensor: '+body.sensorID // body of the SMS message
 
         }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
@@ -209,6 +245,20 @@ app.post('/call3', twilio.webhook({validate: false}), function (request, respons
 
             }
         });
+        
+        //Call user with trigger alert
+                     client.makeCall({
+
+    to: users[i].num, // Any number Twilio can call
+    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+    url: 'https://smart-notification-server.herokuapp.com/callfirst'+body.sensorID// A URL that produces an XML document (TwiML) which contains instructions for the call
+
+}, function(err, responseData) {
+
+    //executed when the call has been initiated.
+    //console.log(responseData.from); // outputs "+14506667788"
+
+});
         //SEND SMS to NUM1
         client.sendMessage({
 
