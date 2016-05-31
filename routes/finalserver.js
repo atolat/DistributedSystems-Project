@@ -82,7 +82,7 @@
  //----------------------------------------------------------------------------------------------------------------------------------------------       
     //Simple call test
         // POST: '/call'
-app.post('/call', twilio.webhook({validate: false}), function (request, response) {
+app.post('/call1', twilio.webhook({validate: false}), function (request, response) {
     console.log(request.body);
     var twiml = new twilio.TwimlResponse();
     twiml.gather({
@@ -90,7 +90,35 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
         numDigits: "1",
         method: "POST"
     }, function (node) {
-         node.say("You are receiving this call to alert you about a sensor you have subscribed to. Press one to acknowledge.",
+         node.say("You are receiving this call to alert you about a notification from sensor one. Press one to acknowledge.",
+            {voice: "alice", language: "en-GB", loop: 3});
+    });
+    response.send(twiml);
+});
+        
+app.post('/call2', twilio.webhook({validate: false}), function (request, response) {
+    console.log(request.body);
+    var twiml = new twilio.TwimlResponse();
+    twiml.gather({
+        action: "/ack",
+        numDigits: "1",
+        method: "POST"
+    }, function (node) {
+         node.say("You are receiving this call to alert you about a notification from sensor two. Press one to acknowledge.",
+            {voice: "alice", language: "en-GB", loop: 3});
+    });
+    response.send(twiml);
+});
+        
+app.post('/call3', twilio.webhook({validate: false}), function (request, response) {
+    console.log(request.body);
+    var twiml = new twilio.TwimlResponse();
+    twiml.gather({
+        action: "/ack",
+        numDigits: "1",
+        method: "POST"
+    }, function (node) {
+         node.say("You are receiving this call to alert you about a notification from sensor three. Press one to acknowledge.",
             {voice: "alice", language: "en-GB", loop: 3});
     });
     response.send(twiml);
@@ -207,7 +235,7 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
 
             to: body.num2, // Any number Twilio can deliver to
             from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-            body: 'Hi,  Aishwariya  you have been subscribed to Arpan\'s sensor.' // body of the SMS message
+            body: 'Hi, ' + body.name + ' has added you to our service!!' // body of the SMS message
 
         }, function (err, responseData) { //this function is executed when a response is received from Twilio
 
@@ -231,25 +259,25 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
         res.json(body);
     });
         
-
-    //CALL TEST
-    //url/call
-    app.post('/callme', function (req, res) {
-                client.makeCall({
-
-    to:'+19492937594', // Any number Twilio can call
-    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-    url: 'https://smart-notification-server.herokuapp.com/call' // A URL that produces an XML document (TwiML) which contains instructions for the call
-
-}, function(err, responseData) {
-
-    //executed when the call has been initiated.
-    console.log(responseData.from); // outputs "+14506667788"
-
-});
-        res.json(req);
-    });        
-        
+//
+//    //CALL TEST
+//    //url/call
+//    app.post('/callme', function (req, res) {
+//                client.makeCall({
+//
+//    to:'+19492937594', // Any number Twilio can call
+//    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+//    url: 'https://smart-notification-server.herokuapp.com/call' // A URL that produces an XML document (TwiML) which contains instructions for the call
+//
+//}, function(err, responseData) {
+//
+//    //executed when the call has been initiated.
+//    console.log(responseData.from); // outputs "+14506667788"
+//
+//});
+//        res.json(req);
+//    });        
+//        
        
 
         
@@ -369,7 +397,7 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
 
     to: users[i].num, // Any number Twilio can call
     from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-    url: 'https://smart-notification-server.herokuapp.com/call'// A URL that produces an XML document (TwiML) which contains instructions for the call
+    url: 'https://smart-notification-server.herokuapp.com/call'+body.sensorID// A URL that produces an XML document (TwiML) which contains instructions for the call
 
 }, function(err, responseData) {
 
