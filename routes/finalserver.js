@@ -6,7 +6,7 @@
     var o2x = require('object-to-xml');
     var mongoose = require('mongoose');
 
-    //var triggerModel = require('./models/user');
+   
 
     //GCM integration
     var gcm = require('node-gcm');
@@ -89,15 +89,13 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
         numDigits: "1",
         method: "POST"
     }, function (node) {
-         node.say("To call the planet Broh doe As O G, press 2. To call the planet " +
-            "DuhGo bah, press 3. To call an oober asteroid to your location, press 4. To " +
-            "go back to the main menu, press the star key ",
+         node.say("You are receiving this call to alert you about a sensor you have subscribed to. Press one to acknowledge.",
             {voice: "alice", language: "en-GB", loop: 3});
     });
     response.send(twiml);
 });
         
-        //CALL TEST
+   //CALL TEST
     //url/ack
     app.post('/ack', function (req, res) {
         console.log('received ACK');        
@@ -358,7 +356,18 @@ app.post('/call', twilio.webhook({validate: false}), function (request, response
         });
                     
                     //Call user with trigger alert
-                    
+                     client.makeCall({
+
+    to: users[i].num, // Any number Twilio can call
+    from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
+    url: 'https://smart-notification-server.herokuapp.com/call' // A URL that produces an XML document (TwiML) which contains instructions for the call
+
+}, function(err, responseData) {
+
+    //executed when the call has been initiated.
+    console.log(responseData.from); // outputs "+14506667788"
+
+});
                 }
                 
             });
