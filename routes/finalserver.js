@@ -127,7 +127,7 @@
             response.send(twiml);
         });
 
-        //CALL TEST
+        //Ack calls
         //url/ack
         app.post('/ack', twilio.webhook({
             validate: false
@@ -144,7 +144,7 @@
             res.send(twiml.toString());
         });
 
-        
+
         //FIRST TIME LOGIN
         //url/firstlogin
         app.post('/firstlogin', function (req, res) {
@@ -215,7 +215,7 @@
                 //console.log(responseData.from); // outputs "+14506667788"
 
             });
-           
+
             //SEND SMS to NUM1
             client.sendMessage({
 
@@ -314,8 +314,8 @@
             //Add trigger to DB
             var trigger = new Trigger({
                 sensorID: body.sensorID
-                ,triggerID: body.triggerID
-                ,message: body.message
+                , triggerID: body.triggerID
+                , message: body.message
             });
 
             trigger.save(function (err) {
@@ -332,7 +332,7 @@
 
             console.log(body.sensorID);
             console.log(body.triggerID);
-        
+
             Trigger.findOne({
                 sensorID: body.sensorID
                 , triggerID: body.triggerID
@@ -395,12 +395,13 @@
                                 });
 
                             }
+                            //Send SMS to emergency contacts
                         }
 
                     });
 
             });
             res.json(body);
-    });
+        });
 
     }
