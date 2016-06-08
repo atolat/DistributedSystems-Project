@@ -13,7 +13,7 @@
         //Twilio Integration
         var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
         var twilio = require('twilio');
-        
+
         //Global sensor and trigger IDs
         var sensorCurrent;
         var triggerCurrent;
@@ -97,24 +97,25 @@
             validate: false
         }), function (request, response) {
             Trigger.findOne({
-                sensorID:sensorCurrent
-                , triggerID:triggerCurrent
+                sensorID: sensorCurrent
+                , triggerID: triggerCurrent
             }, function (err, trigger) {
                 if (err) console.log(err);
                 console.log(trigger.sensorID);
                 console.log(trigger.message);
-            
-            
-            var twiml = new twilio.TwimlResponse();
-            twiml.gather({
-                action: "/ack"
-                , numDigits: "1"
-                , method: "POST"
-            }, function (node) {
-                node.say("You are receiving this call to alert you about a notification from sensor "+sensorCurrent+"."+trigger.message+".", {
-                    voice: "alice"
-                    , language: "en-GB"
-                    , loop: 3
+
+
+                var twiml = new twilio.TwimlResponse();
+                twiml.gather({
+                    action: "/ack"
+                    , numDigits: "1"
+                    , method: "POST"
+                }, function (node) {
+                    node.say("You are receiving this call to alert you about a notification from sensor " + sensorCurrent + "." + trigger.message + ".", {
+                        voice: "alice"
+                        , language: "en-GB"
+                        , loop: 3
+                    });
                 });
             });
             response.send(twiml);
@@ -155,23 +156,24 @@
             console.log('received ACK');
             res.send(twiml.toString());
         });
-        
+
         //url/ack1
         app.post('/ack1', twilio.webhook({
             validate: false
-        }), function (req, res) {var selectedOption = request.body.Digits;
-    var optionActions = {
-        "1": completeAck,
-        "2": connectEmergency
-    };
+        }), function (req, res) {
+            var selectedOption = request.body.Digits;
+            var optionActions = {
+                "1": completeAck
+                , "2": connectEmergency
+            };
 
-    if (optionActions[selectedOption]) {
-        var twiml = new twilio.TwimlResponse();
-        optionActions[selectedOption](twiml);
-        response.send(twiml);
-    }
-    response.send(invalid());
-});
+            if (optionActions[selectedOption]) {
+                var twiml = new twilio.TwimlResponse();
+                optionActions[selectedOption](twiml);
+                response.send(twiml);
+            }
+            response.send(invalid());
+        });
 
 
 
