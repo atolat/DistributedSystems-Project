@@ -434,8 +434,8 @@
                     });
 
             });
-            console.log(sensorCurrent);
-            console.log(triggerCurrent);
+            console.log("Global: "+sensorCurrent);
+            console.log("Global: "+triggerCurrent);
             res.json(body);
         });
 
