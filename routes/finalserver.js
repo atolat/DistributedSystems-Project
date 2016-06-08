@@ -100,9 +100,9 @@
                 sensorID: sensorCurrent
                 , triggerID: triggerCurrent
             }, function (err, trigger) {
-                if (err) console.log(err);
-                console.log(trigger.sensorID);
-                console.log(trigger.message);
+                if (err) console.log(err);  
+//                console.log(trigger.sensorID);
+//                console.log(trigger.message);
 
 
                 var twiml = new twilio.TwimlResponse();
@@ -157,23 +157,23 @@
             res.send(twiml.toString());
         });
 
-        //url/ack1
-        app.post('/ack1', twilio.webhook({
-            validate: false
-        }), function (req, res) {
-            var selectedOption = request.body.Digits;
-            var optionActions = {
-                "1": completeAck
-                , "2": connectEmergency
-            };
-
-            if (optionActions[selectedOption]) {
-                var twiml = new twilio.TwimlResponse();
-                optionActions[selectedOption](twiml);
-                response.send(twiml);
-            }
-            response.send(invalid());
-        });
+//        //url/ack1
+//        app.post('/ack1', twilio.webhook({
+//            validate: false
+//        }), function (req, res) {
+//            var selectedOption = request.body.Digits;
+//            var optionActions = {
+//                "1": completeAck
+//                , "2": connectEmergency
+//            };
+//
+//            if (optionActions[selectedOption]) {
+//                var twiml = new twilio.TwimlResponse();
+//                optionActions[selectedOption](twiml);
+//                response.send(twiml);
+//            }
+//            response.send(invalid());
+//        });
 
 
 
@@ -434,6 +434,8 @@
                     });
 
             });
+            console.log(sensorCurrent);
+            console.log(triggerCurrent);
             res.json(body);
         });
 
