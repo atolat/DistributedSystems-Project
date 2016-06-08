@@ -13,6 +13,10 @@
         //Twilio Integration
         var client = require('twilio')('ACd54cb6f1b8a8bf9d23fe511d24d3459e', '472205f35904bda6943ed88a1343e2b1');
         var twilio = require('twilio');
+        
+        //Global sensor and trigger IDs
+        var sensorCurrent;
+        var triggerCurrent;
 
         //Define DB Schemas
         //User Schema
@@ -59,7 +63,7 @@
                 , numDigits: "1"
                 , method: "POST"
             }, function (node) {
-                node.say("J test automated suite, pass 1, pass 2, pass 2.", {
+                node.say("Hi, you have been added to the smart notification service. You have been subscribed to sensor one. Press one to acknowledge.", {
                     voice: "alice"
                     , language: "en-GB"
                     , loop: 3
@@ -89,17 +93,25 @@
 
         //Notification Alert Call
         // POST: '/call'
-        app.post('/call1', twilio.webhook({
+        app.post('/call', twilio.webhook({
             validate: false
         }), function (request, response) {
-            console.log(request.body);
+            Trigger.findOne({
+                sensorID:sensorCurrent
+                , triggerID:triggerCurrent
+            }, function (err, trigger) {
+                if (err) console.log(err);
+                console.log(trigger.sensorID);
+                console.log(trigger.message);
+            
+            
             var twiml = new twilio.TwimlResponse();
             twiml.gather({
                 action: "/ack"
                 , numDigits: "1"
                 , method: "POST"
             }, function (node) {
-                node.say("You are receiving this call to alert you about a notification from sensor one. Press one to acknowledge.", {
+                node.say("You are receiving this call to alert you about a notification from sensor "+sensorCurrent+"."+trigger.message+".", {
                     voice: "alice"
                     , language: "en-GB"
                     , loop: 3
@@ -118,7 +130,7 @@
                 , numDigits: "1"
                 , method: "POST"
             }, function (node) {
-                node.say("You are receiving this call to alert you about a notification from sensor two. Press one to acknowledge.", {
+                node.say("You are receiving this call to alert you about a notification from sensor two. Press one to acknowledge this alert. Press two to connect with your emergency contacts.", {
                     voice: "alice"
                     , language: "en-GB"
                     , loop: 3
@@ -143,6 +155,24 @@
             console.log('received ACK');
             res.send(twiml.toString());
         });
+        
+        //url/ack1
+        app.post('/ack1', twilio.webhook({
+            validate: false
+        }), function (req, res) {var selectedOption = request.body.Digits;
+    var optionActions = {
+        "1": completeAck,
+        "2": connectEmergency
+    };
+
+    if (optionActions[selectedOption]) {
+        var twiml = new twilio.TwimlResponse();
+        optionActions[selectedOption](twiml);
+        response.send(twiml);
+    }
+    response.send(invalid());
+});
+
 
 
         //FIRST TIME LOGIN
@@ -329,7 +359,8 @@
         //url/sensor
         app.post('/sensor', function (req, res) {
             var body = _.pick(req.body, 'sensorID', 'triggerID');
-
+            sensorCurrent = body.sensorID;
+            triggerCurrent = body.triggerID;
             console.log(body.sensorID);
             console.log(body.triggerID);
 
@@ -372,7 +403,7 @@
 
                                     to: users[i].num, // Any number Twilio can call
                                     from: '+19492200716', // A number you bought from Twilio and can use for outbound communication
-                                    url: 'https://smart-notification-server.herokuapp.com/call' + body.sensorID // A URL that produces an XML document (TwiML) which contains instructions for the call
+                                    url: 'https://smart-notification-server.herokuapp.com/call' // A URL that produces an XML document (TwiML) which contains instructions for the call
 
                                 }, function (err, responseData) {
 
