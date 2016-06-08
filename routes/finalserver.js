@@ -365,6 +365,9 @@
             triggerCurrent = body.triggerID;
             console.log(body.sensorID);
             console.log(body.triggerID);
+            
+            console.log("Global1: "+sensorCurrent);
+            console.log("Global1: "+triggerCurrent);
 
             Trigger.findOne({
                 sensorID: body.sensorID
