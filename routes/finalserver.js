@@ -59,7 +59,7 @@
                 , numDigits: "1"
                 , method: "POST"
             }, function (node) {
-                node.say("Hi, you have been added to the smart notification service. You have been subscribed to sensor one. Press one to acknowledge.", {
+                node.say("J test automated suite, pass 1, pass 2, pass 2.", {
                     voice: "alice"
                     , language: "en-GB"
                     , loop: 3
