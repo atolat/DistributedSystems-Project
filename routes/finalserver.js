@@ -114,7 +114,7 @@
                 }, function (node) {
                     node.say("You are receiving this call to alert you about a notification from sensor " + sensorCurrent + ". " + trigger.message + ".", {
                         voice: "alice"
-                        , language: "en-GB"
+                        , language: "en-IN"
                         , loop: 3
                     });
 
