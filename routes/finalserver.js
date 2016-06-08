@@ -96,18 +96,18 @@
         app.post('/call', twilio.webhook({
             validate: false
         }), function (request, response) {
-            var twiml = new twilio.TwimlResponse();
+
             Trigger.findOne({
                 sensorID: sensorCurrent
                 , triggerID: triggerCurrent
             }, function (err, trigger) {
-                if (err) console.log(err);  
+                if (err) console.log(err);
 
                 console.log(trigger);
+                var twiml = new twilio.TwimlResponse();
 
 
-                
-                this.twiml.gather({
+                twiml.gather({
                     action: "/ack"
                     , numDigits: "1"
                     , method: "POST"
@@ -117,9 +117,10 @@
                         , language: "en-GB"
                         , loop: 3
                     });
+
                 });
+                response.send(twiml);
             });
-            response.send(twiml);
         });
 
         app.post('/call2', twilio.webhook({
@@ -158,23 +159,23 @@
             res.send(twiml.toString());
         });
 
-//        //url/ack1
-//        app.post('/ack1', twilio.webhook({
-//            validate: false
-//        }), function (req, res) {
-//            var selectedOption = request.body.Digits;
-//            var optionActions = {
-//                "1": completeAck
-//                , "2": connectEmergency
-//            };
-//
-//            if (optionActions[selectedOption]) {
-//                var twiml = new twilio.TwimlResponse();
-//                optionActions[selectedOption](twiml);
-//                response.send(twiml);
-//            }
-//            response.send(invalid());
-//        });
+        //        //url/ack1
+        //        app.post('/ack1', twilio.webhook({
+        //            validate: false
+        //        }), function (req, res) {
+        //            var selectedOption = request.body.Digits;
+        //            var optionActions = {
+        //                "1": completeAck
+        //                , "2": connectEmergency
+        //            };
+        //
+        //            if (optionActions[selectedOption]) {
+        //                var twiml = new twilio.TwimlResponse();
+        //                optionActions[selectedOption](twiml);
+        //                response.send(twiml);
+        //            }
+        //            response.send(invalid());
+        //        });
 
 
 
@@ -366,9 +367,9 @@
             triggerCurrent = body.triggerID;
             console.log(body.sensorID);
             console.log(body.triggerID);
-            
-            console.log("Global1: "+sensorCurrent);
-            console.log("Global1: "+triggerCurrent);
+
+            console.log("Global1: " + sensorCurrent);
+            console.log("Global1: " + triggerCurrent);
 
             Trigger.findOne({
                 sensorID: body.sensorID
@@ -438,8 +439,8 @@
                     });
 
             });
-            console.log("Global: "+sensorCurrent);
-            console.log("Global: "+triggerCurrent);
+            console.log("Global: " + sensorCurrent);
+            console.log("Global: " + triggerCurrent);
             res.json(body);
         });
 
