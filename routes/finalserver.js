@@ -96,6 +96,7 @@
         app.post('/call', twilio.webhook({
             validate: false
         }), function (request, response) {
+            var twiml = new twilio.TwimlResponse();
             Trigger.findOne({
                 sensorID: sensorCurrent
                 , triggerID: triggerCurrent
@@ -105,7 +106,7 @@
                 console.log(trigger);
 
 
-                var twiml = new twilio.TwimlResponse();
+                
                 twiml.gather({
                     action: "/ack"
                     , numDigits: "1"
