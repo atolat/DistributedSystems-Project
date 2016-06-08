@@ -101,8 +101,8 @@
                 , triggerID: triggerCurrent
             }, function (err, trigger) {
                 if (err) console.log(err);  
-//                console.log(trigger.sensorID);
-//                console.log(trigger.message);
+
+                console.log(trigger);
 
 
                 var twiml = new twilio.TwimlResponse();
@@ -111,7 +111,7 @@
                     , numDigits: "1"
                     , method: "POST"
                 }, function (node) {
-                    node.say("You are receiving this call to alert you about a notification from sensor " + sensorCurrent + "." + trigger.message + ".", {
+                    node.say("You are receiving this call to alert you about a notification from sensor " + sensorCurrent + ". " + trigger.message + ".", {
                         voice: "alice"
                         , language: "en-GB"
                         , loop: 3
