@@ -112,7 +112,7 @@
                     , numDigits: "1"
                     , method: "POST"
                 }, function (node) {
-                    node.say("You are receiving this call to alert you about a notification from sensor " + sensorCurrent + ". " + trigger.message + ".", {
+                    node.say("Notification from sensor " + sensorCurrent + ". " + trigger.message + ".", {
                         voice: "alice"
                         , language: "en-IN"
                         , loop: 3
@@ -166,7 +166,7 @@
         //            var selectedOption = request.body.Digits;
         //            var optionActions = {
         //                "1": completeAck
-        //                , "2": connectEmergency
+        //               ,"2": connectEmergency
         //            };
         //
         //            if (optionActions[selectedOption]) {
@@ -176,9 +176,7 @@
         //            }
         //            response.send(invalid());
         //        });
-
-
-
+        
         //FIRST TIME LOGIN
         //url/firstlogin
         app.post('/firstlogin', function (req, res) {
