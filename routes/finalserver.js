@@ -65,7 +65,7 @@
             }, function (node) {
                 node.say("Hi, you have been added to the smart notification service. You have been subscribed to sensor one. Press one to acknowledge.", {
                     voice: "alice"
-                    , language: "en-IN"
+                    , language: "en-GB"
                     , loop: 3
                 });
             });
@@ -84,7 +84,7 @@
             }, function (node) {
                 node.say("Hi, you have been added to the smart notification service. You have been subscribed to sensor two. Press one to acknowledge.", {
                     voice: "alice"
-                    , language: "en-IN"
+                    , language: "en-GB"
                     , loop: 3
                 });
             });
@@ -114,7 +114,7 @@
                 }, function (node) {
                     node.say("Notification from sensor " + sensorCurrent + ". " + trigger.message + ".", {
                         voice: "alice"
-                        , language: "en-IN"
+                        , language: "en-GB"
                         , loop: 3
                     });
 
@@ -123,24 +123,24 @@
             });
         });
 
-        app.post('/call2', twilio.webhook({
-            validate: false
-        }), function (request, response) {
-            console.log(request.body);
-            var twiml = new twilio.TwimlResponse();
-            twiml.gather({
-                action: "/ack"
-                , numDigits: "1"
-                , method: "POST"
-            }, function (node) {
-                node.say("You are receiving this call to alert you about a notification from sensor two. Press one to acknowledge this alert. Press two to connect with your emergency contacts.", {
-                    voice: "alice"
-                    , language: "en-IN"
-                    , loop: 3
-                });
-            });
-            response.send(twiml);
-        });
+//        app.post('/call2', twilio.webhook({
+//            validate: false
+//        }), function (request, response) {
+//            console.log(request.body);
+//            var twiml = new twilio.TwimlResponse();
+//            twiml.gather({
+//                action: "/ack"
+//                , numDigits: "1"
+//                , method: "POST"
+//            }, function (node) {
+//                node.say("You are receiving this call to alert you about a notification from sensor two. Press one to acknowledge this alert. Press two to connect with your emergency contacts.", {
+//                    voice: "alice"
+//                    , language: "en-GB"
+//                    , loop: 3
+//                });
+//            });
+//            response.send(twiml);
+//        });
 
         //Ack calls
         //url/ack
@@ -152,7 +152,7 @@
             twiml
                 .say('Thanks for the acknowledgement . Goodbye', {
                     voice: 'alice'
-                    , language: 'en-IN'
+                    , language: 'en-GB'
                 })
                 .hangup();
             console.log('received ACK');
