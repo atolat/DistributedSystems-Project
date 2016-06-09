@@ -65,7 +65,7 @@
             }, function (node) {
                 node.say("Hi, you have been added to the smart notification service. You have been subscribed to sensor one. Press one to acknowledge.", {
                     voice: "alice"
-                    , language: "en-GB"
+                    , language: "en-IN"
                     , loop: 3
                 });
             });
@@ -84,7 +84,7 @@
             }, function (node) {
                 node.say("Hi, you have been added to the smart notification service. You have been subscribed to sensor two. Press one to acknowledge.", {
                     voice: "alice"
-                    , language: "en-GB"
+                    , language: "en-IN"
                     , loop: 3
                 });
             });
@@ -135,7 +135,7 @@
             }, function (node) {
                 node.say("You are receiving this call to alert you about a notification from sensor two. Press one to acknowledge this alert. Press two to connect with your emergency contacts.", {
                     voice: "alice"
-                    , language: "en-GB"
+                    , language: "en-IN"
                     , loop: 3
                 });
             });
@@ -152,7 +152,7 @@
             twiml
                 .say('Thanks for the acknowledgement . Goodbye', {
                     voice: 'alice'
-                    , language: 'en-GB'
+                    , language: 'en-IN'
                 })
                 .hangup();
             console.log('received ACK');
