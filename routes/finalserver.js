@@ -26,7 +26,7 @@
 
             name: String
             , token: String
-            , num: String
+            , num: String 
             , num1: String
             , num2: String
             , sensorID: String
